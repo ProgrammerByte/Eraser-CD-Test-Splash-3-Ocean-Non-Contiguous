@@ -226,18 +226,7 @@ void slave() {
 
   /* wait until all processes have completed the above initialization  */
 
-  {
-    pthread_mutex_lock(&((bars->sl_prini).bar_mutex));
-    (bars->sl_prini).bar_teller++;
-    if ((bars->sl_prini).bar_teller == (nprocs)) {
-      (bars->sl_prini).bar_teller = 0;
-      pthread_cond_broadcast(&((bars->sl_prini).bar_cond));
-    } else {
-      pthread_cond_wait(&((bars->sl_prini).bar_cond),
-                        &((bars->sl_prini).bar_mutex));
-    }
-    pthread_mutex_unlock(&((bars->sl_prini).bar_mutex));
-  }
+  { pthread_barrier_wait(&(bars->sl_prini)); };
 
   istart = gp[procid].rel_start_y[numlev - 1];
   iend = istart + gp[procid].rel_num_y[numlev - 1] - 1;
@@ -294,18 +283,7 @@ void slave() {
            wrk1->psib[i][j - 1] - ressqr * wrk1->psib[i][j]);
     }
   }
-  {
-    pthread_mutex_lock(&((bars->sl_prini).bar_mutex));
-    (bars->sl_prini).bar_teller++;
-    if ((bars->sl_prini).bar_teller == (nprocs)) {
-      (bars->sl_prini).bar_teller = 0;
-      pthread_cond_broadcast(&((bars->sl_prini).bar_cond));
-    } else {
-      pthread_cond_wait(&((bars->sl_prini).bar_cond),
-                        &((bars->sl_prini).bar_mutex));
-    }
-    pthread_mutex_unlock(&((bars->sl_prini).bar_mutex));
-  }
+  { pthread_barrier_wait(&(bars->sl_prini)); };
 
   multig(procid);
 
@@ -315,18 +293,7 @@ void slave() {
     }
   }
 
-  {
-    pthread_mutex_lock(&((bars->sl_psini).bar_mutex));
-    (bars->sl_psini).bar_teller++;
-    if ((bars->sl_psini).bar_teller == (nprocs)) {
-      (bars->sl_psini).bar_teller = 0;
-      pthread_cond_broadcast(&((bars->sl_psini).bar_cond));
-    } else {
-      pthread_cond_wait(&((bars->sl_psini).bar_cond),
-                        &((bars->sl_psini).bar_mutex));
-    }
-    pthread_mutex_unlock(&((bars->sl_psini).bar_mutex));
-  }
+  { pthread_barrier_wait(&(bars->sl_psini)); };
 
   /* update the local running sum psibipriv by summing all the resulting
      values in that process's share of the psib matrix   */
@@ -519,18 +486,7 @@ void slave() {
     }
   }
 
-  {
-    pthread_mutex_lock(&((bars->sl_onetime).bar_mutex));
-    (bars->sl_onetime).bar_teller++;
-    if ((bars->sl_onetime).bar_teller == (nprocs)) {
-      (bars->sl_onetime).bar_teller = 0;
-      pthread_cond_broadcast(&((bars->sl_onetime).bar_cond));
-    } else {
-      pthread_cond_wait(&((bars->sl_onetime).bar_cond),
-                        &((bars->sl_onetime).bar_mutex));
-    }
-    pthread_mutex_unlock(&((bars->sl_onetime).bar_mutex));
-  }
+  { pthread_barrier_wait(&(bars->sl_onetime)); };
 
   /***************************************************************
    one-time stuff over at this point

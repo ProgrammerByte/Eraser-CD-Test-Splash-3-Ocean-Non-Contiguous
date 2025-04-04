@@ -65,35 +65,13 @@ void multig(long my_id) {
     /* barrier to make sure all procs have finished intadd or rescal   */
     /* before proceeding with relaxation                               */
 
-    {
-      pthread_mutex_lock(&((bars->error_barrier).bar_mutex));
-      (bars->error_barrier).bar_teller++;
-      if ((bars->error_barrier).bar_teller == (nprocs)) {
-        (bars->error_barrier).bar_teller = 0;
-        pthread_cond_broadcast(&((bars->error_barrier).bar_cond));
-      } else {
-        pthread_cond_wait(&((bars->error_barrier).bar_cond),
-                          &((bars->error_barrier).bar_mutex));
-      }
-      pthread_mutex_unlock(&((bars->error_barrier).bar_mutex));
-    }
+    { pthread_barrier_wait(&(bars->error_barrier)); };
 
     relax(k, &red_local_err, RED_ITER, my_num);
 
     /* barrier to make sure all red computations have been performed   */
 
-    {
-      pthread_mutex_lock(&((bars->error_barrier).bar_mutex));
-      (bars->error_barrier).bar_teller++;
-      if ((bars->error_barrier).bar_teller == (nprocs)) {
-        (bars->error_barrier).bar_teller = 0;
-        pthread_cond_broadcast(&((bars->error_barrier).bar_cond));
-      } else {
-        pthread_cond_wait(&((bars->error_barrier).bar_cond),
-                          &((bars->error_barrier).bar_mutex));
-      }
-      pthread_mutex_unlock(&((bars->error_barrier).bar_mutex));
-    }
+    { pthread_barrier_wait(&(bars->error_barrier)); };
 
     relax(k, &black_local_err, BLACK_ITER, my_num);
 
@@ -120,36 +98,14 @@ void multig(long my_id) {
 
     /* barrier to make sure all processors have checked local error    */
 
-    {
-      pthread_mutex_lock(&((bars->error_barrier).bar_mutex));
-      (bars->error_barrier).bar_teller++;
-      if ((bars->error_barrier).bar_teller == (nprocs)) {
-        (bars->error_barrier).bar_teller = 0;
-        pthread_cond_broadcast(&((bars->error_barrier).bar_cond));
-      } else {
-        pthread_cond_wait(&((bars->error_barrier).bar_cond),
-                          &((bars->error_barrier).bar_mutex));
-      }
-      pthread_mutex_unlock(&((bars->error_barrier).bar_mutex));
-    }
+    { pthread_barrier_wait(&(bars->error_barrier)); };
 
     g_error = global_err_multi;
 
     /* barrier to make sure master does not cycle back to top of loop  */
     /* and reset global_err before we read it and decide what to do   */
 
-    {
-      pthread_mutex_lock(&((bars->error_barrier).bar_mutex));
-      (bars->error_barrier).bar_teller++;
-      if ((bars->error_barrier).bar_teller == (nprocs)) {
-        (bars->error_barrier).bar_teller = 0;
-        pthread_cond_broadcast(&((bars->error_barrier).bar_cond));
-      } else {
-        pthread_cond_wait(&((bars->error_barrier).bar_cond),
-                          &((bars->error_barrier).bar_mutex));
-      }
-      pthread_mutex_unlock(&((bars->error_barrier).bar_mutex));
-    }
+    { pthread_barrier_wait(&(bars->error_barrier)); };
 
     if (g_error >= lev_tol[k]) {
       if (wu > wmax) {

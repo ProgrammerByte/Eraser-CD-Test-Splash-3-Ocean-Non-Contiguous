@@ -258,106 +258,26 @@ int main(int argc, char *argv[]) {
   { pthread_mutex_init(&(global_error_lock), NULL); }
   { pthread_mutex_init(&(global_bar_lock), NULL); }
 
-  {
-    pthread_mutex_init(&((bars->iteration).bar_mutex), NULL);
-    pthread_cond_init(&((bars->iteration).bar_cond), NULL);
-    (bars->iteration).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->gsudn).bar_mutex), NULL);
-    pthread_cond_init(&((bars->gsudn).bar_cond), NULL);
-    (bars->gsudn).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->p_setup).bar_mutex), NULL);
-    pthread_cond_init(&((bars->p_setup).bar_cond), NULL);
-    (bars->p_setup).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->p_redph).bar_mutex), NULL);
-    pthread_cond_init(&((bars->p_redph).bar_cond), NULL);
-    (bars->p_redph).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->p_soln).bar_mutex), NULL);
-    pthread_cond_init(&((bars->p_soln).bar_cond), NULL);
-    (bars->p_soln).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->p_subph).bar_mutex), NULL);
-    pthread_cond_init(&((bars->p_subph).bar_cond), NULL);
-    (bars->p_subph).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_prini).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_prini).bar_cond), NULL);
-    (bars->sl_prini).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_psini).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_psini).bar_cond), NULL);
-    (bars->sl_psini).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_onetime).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_onetime).bar_cond), NULL);
-    (bars->sl_onetime).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_1).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_1).bar_cond), NULL);
-    (bars->sl_phase_1).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_2).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_2).bar_cond), NULL);
-    (bars->sl_phase_2).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_3).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_3).bar_cond), NULL);
-    (bars->sl_phase_3).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_4).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_4).bar_cond), NULL);
-    (bars->sl_phase_4).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_5).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_5).bar_cond), NULL);
-    (bars->sl_phase_5).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_6).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_6).bar_cond), NULL);
-    (bars->sl_phase_6).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_7).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_7).bar_cond), NULL);
-    (bars->sl_phase_7).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_8).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_8).bar_cond), NULL);
-    (bars->sl_phase_8).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_9).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_9).bar_cond), NULL);
-    (bars->sl_phase_9).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->sl_phase_10).bar_mutex), NULL);
-    pthread_cond_init(&((bars->sl_phase_10).bar_cond), NULL);
-    (bars->sl_phase_10).bar_teller = 0;
-  }
-  {
-    pthread_mutex_init(&((bars->error_barrier).bar_mutex), NULL);
-    pthread_cond_init(&((bars->error_barrier).bar_cond), NULL);
-    (bars->error_barrier).bar_teller = 0;
-  }
+  pthread_barrier_init(bars->iteration);
+  pthread_barrier_init(bars->gsudn);
+  pthread_barrier_init(bars->p_setup);
+  pthread_barrier_init(bars->p_redph);
+  pthread_barrier_init(bars->p_soln);
+  pthread_barrier_init(bars->p_subph);
+  pthread_barrier_init(bars->sl_prini);
+  pthread_barrier_init(bars->sl_psini);
+  pthread_barrier_init(bars->sl_onetime);
+  pthread_barrier_init(bars->sl_phase_1);
+  pthread_barrier_init(bars->sl_phase_2);
+  pthread_barrier_init(bars->sl_phase_3);
+  pthread_barrier_init(bars->sl_phase_4);
+  pthread_barrier_init(bars->sl_phase_5);
+  pthread_barrier_init(bars->sl_phase_6);
+  pthread_barrier_init(bars->sl_phase_7);
+  pthread_barrier_init(bars->sl_phase_8);
+  pthread_barrier_init(bars->sl_phase_9);
+  pthread_barrier_init(bars->sl_phase_10);
+  pthread_barrier_init(bars->error_barrier);
 
   imx[numlev - 1] = im;
   jmx[numlev - 1] = jm;
