@@ -765,9 +765,9 @@ void slave2(long procid, long firstrow, long lastrow, long numrows,
   /* after computing its private sum, every process adds that to the
      shared running sum psiai  */
 
-  { pthread_mutex_lock(&(global_psibilock)); }
+  { pthread_mutex_lock(&(global_psiailock)); }
   global_psiai = global_psiai + psiaipriv;
-  { pthread_mutex_unlock(&(global_psibilock)); }
+  { pthread_mutex_unlock(&(global_psiailock)); }
 
   { pthread_barrier_wait(&(bars->sl_phase_7)); };
 
