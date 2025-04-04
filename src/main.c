@@ -52,10 +52,6 @@ pthread_mutex_t __intern__;
 #define DEFAULT_E 1e-7
 #define DEFAULT_T 28800.0
 #define DEFAULT_R 20000.0
-#define INPROCS 16 /* Maximum number of processors */
-#define IMAX 258
-#define JMAX 258
-#define MAX_LEVELS 9
 #define PAGE_SIZE 4096
 
 struct fields_struct *fields;
@@ -141,6 +137,7 @@ int main(int argc, char *argv[]) {
   extern char *optarg;
   long ch;
   unsigned long start;
+  double *tmp_ptr;
 
   { (start) = time(0); }
 
