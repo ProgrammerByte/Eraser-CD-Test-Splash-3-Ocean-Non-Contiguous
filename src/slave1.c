@@ -498,7 +498,9 @@ void slave() {
       dhourflag = 0;
       if (nstep == 1) {
         if (procid == MASTER) {
+          EraserIgnoreOn();
           { (global_trackstart) = time(0); }
+          EraserIgnoreOff();
         }
         if ((procid == MASTER) || (do_stats)) {
           { (t1) = time(0); };

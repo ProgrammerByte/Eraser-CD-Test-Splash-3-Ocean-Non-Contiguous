@@ -139,6 +139,7 @@ int main(int argc, char *argv[]) {
   unsigned long start;
   double *tmp_ptr;
 
+  EraserIgnoreOn();
   { (start) = time(0); }
 
   while ((ch = getopt(argc, argv, "n:p:e:r:t:soh")) != -1) {
@@ -468,6 +469,8 @@ int main(int argc, char *argv[]) {
   if (do_output) {
     printf("                       MULTIGRID OUTPUTS\n");
   }
+
+  EraserIgnoreOff();
 
   {
     long i, Error;

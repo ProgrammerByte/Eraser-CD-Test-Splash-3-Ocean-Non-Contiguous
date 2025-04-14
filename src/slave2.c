@@ -700,7 +700,9 @@ void slave2(long procid, long firstrow, long lastrow, long numrows,
   }
 
   if (procid == MASTER) {
+    EraserIgnoreOn();
     global_psiai = 0.0;
+    EraserIgnoreOff();
   }
 
   /*  copy the solution for use as initial guess in next time-step  */

@@ -59,7 +59,9 @@ void multig(long my_id) {
     errp = g_error;
     iter++;
     if (my_num == MASTER) {
+      EraserIgnoreOn();
       global_err_multi = 0.0;
+      EraserIgnoreOff();
     }
 
     /* barrier to make sure all procs have finished intadd or rescal   */

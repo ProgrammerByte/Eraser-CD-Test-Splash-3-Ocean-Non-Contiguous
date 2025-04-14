@@ -31,6 +31,7 @@
 #define BLACK_ITER 1
 #define PAGE_SIZE 4096
 
+#include "eraser.h"
 #include <assert.h>
 #include <pthread.h>
 #include <semaphore.h>
